@@ -9,4 +9,12 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+  @Get('/Anime')
+  getAnime(): string {
+    return this.appService.getAnime();
+  }
+  @Get('/Filme')
+  getFilme(): string {
+    return this.appService.getFilme();
+  }
 }

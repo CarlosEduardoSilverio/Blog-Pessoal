@@ -1,5 +1,6 @@
 import { IsNotEmpty, MaxLength} from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import { Tema } from "src/tema/entities/tema.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
 @Entity({name: "tb_postagens"})
     export class Postagem{
@@ -10,17 +11,17 @@ import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm
         @IsNotEmpty()
         @MaxLength(100)
         @Column({length: 100, nullable: false})
-        titulo: string
+        nome: string
 
         @IsNotEmpty()
         @Column({length: 1000, nullable: false})
-        texto: string
+        sobreEu: string
 
         @UpdateDateColumn()
-        data: Date
+        dataNascimento: Date
 
-        @IsNotEmpty()
-        @MaxLength(1000)
-        @Column({length: 1000, nullable: false})
-        comentario: string
+        @ManyToOne(() => Tema, (tema) => tema.postagem, {
+            onDelete: "CASCADE"
+        })
+        tema: Tema
     }

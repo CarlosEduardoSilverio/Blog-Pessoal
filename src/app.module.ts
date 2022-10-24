@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { Postagem } from './postagem/entities/postagem.entity';
+import { PostagemModule } from './postagem/postagem.module';
+import { TemaModule } from './tema/tema.module';
 
 @Module({
   imports: [
@@ -13,11 +13,14 @@ import { Postagem } from './postagem/entities/postagem.entity';
       username: 'root',
       password: 'root',
       database: 'db_blogpessoal',
-      entities: [Postagem],
+      entities: [Postagem, TemaModule],
       synchronize: true
-    })
+    }),
+    PostagemModule,
+    TemaModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }
